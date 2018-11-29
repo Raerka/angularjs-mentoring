@@ -1,0 +1,10 @@
+main {
+  flex: 1 0 auto;
+}
+.container {
+  background-color: lightblue;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 15px;
+}
