@@ -5,6 +5,8 @@ import { AppComponent } from './app.component';
 import {CoreModule} from './core/core.module';
 import {CoursesListModule} from './courses-list/courses-list.module';
 import {UserService} from './services/user.service';
+import {RouterModule} from '@angular/router';
+import {ROUTES} from './app.routes';
 
 @NgModule({
   declarations: [
@@ -13,7 +15,8 @@ import {UserService} from './services/user.service';
   imports: [
     BrowserModule,
     CoreModule,
-    CoursesListModule
+    CoursesListModule,
+    RouterModule.forRoot(ROUTES)
   ],
   providers: [UserService],
   bootstrap: [AppComponent]
