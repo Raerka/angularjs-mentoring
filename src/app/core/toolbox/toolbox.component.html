@@ -1,9 +1,10 @@
-<form class="form-inline mt-2 py-3 mt-md-0 mb-5 bg-light rounded">
-    <div class="col-8">
-      <input class="form-control mr-sm-2 w-50" type="text" placeholder="Name, fragment or date" aria-label="Search">
-      <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
-    </div>
+<div class="form-inline mt-2 py-3 mt-md-0 mb-2 bg-light rounded">
+  <div class="col-8">
+      <input [(ngModel)]="course" class="form-control mr-sm-2 w-50" type="text" placeholder="Name, fragment or date" aria-label="Search">
+      <button class="btn btn-outline-primary my-2 my-sm-0" type="submit" (click)="findCourse()">Search</button>
+  </div>
     <div class="col-4 text-right">
       <button class="btn btn-outline-primary" type="button">Add course</button>
     </div>
-</form>
+</div>
+
