@@ -1,4 +1,4 @@
-<div class="alert alert-primary" role="alert">
+<div class="alert alert-primary" role="alert" *ngIf="courseItem">
   <div class="row py-1">
     <div class="col-6">{{courseItem.title}}</div>
     <div class="col-2 text-right">{{courseItem.duration}} min</div>
@@ -10,7 +10,7 @@
   <div class="row py-1">
     <div class="col-10">{{courseItem.description}}</div>
     <div class="col-2 text-right">
-      <button (click)="deleteCourseById(courseItem.id)" type="button" class="btn btn btn-outline-primary">Delete</button>
+      <button (click)="deleteCourseById(courseItem.id)" type="button" class="btn btn btn-outline-primary delete">Delete</button>
     </div>
   </div>
 </div>
