@@ -1,8 +1,16 @@
-<div class="alert alert-primary" role="alert" *ngIf="courseItem">
+<div
+  class="alert alert-primary"
+  role="alert"
+  [appHighlightCourse]="courseItem.creationDate"
+  [ngClass]="{rated: courseItem.topRated}"
+>
   <div class="row py-1">
-    <div class="col-6">{{courseItem.title}}</div>
-    <div class="col-2 text-right">{{courseItem.duration}} min</div>
-    <div class="col-2 text-center">{{courseItem.creationDate}}</div>
+    <div class="col-4">
+      {{courseItem.title | uppercase}}
+      <mat-icon class="align-bottom" *ngIf="courseItem.topRated">star</mat-icon>
+    </div>
+    <div class="col-2 text-right">{{courseItem.duration | duration}}</div>
+    <div class="col-4 text-center">{{courseItem.creationDate | date:'fullDate'}}</div>
     <div class="col-2 text-right">
       <button type="button" class="btn btn btn-outline-primary">Edit</button>
     </div>
