@@ -1,5 +1,5 @@
 import {Component, OnInit, Input, Output, EventEmitter, OnChanges} from '@angular/core';
-import {CourseItem} from '../courses.service';
+import {CourseItem} from '../course.service';
 
 @Component({
   selector: 'app-courses-list-item',
@@ -10,17 +10,11 @@ export class CoursesListItemComponent implements OnInit, OnChanges {
   @Input() public courseItem: CourseItem;
   @Output() public deleteCourse: EventEmitter<number> = new EventEmitter<number>();
 
-  constructor() {
-    console.log('Constructor in Course Item');
-  }
+  constructor() { }
 
-  ngOnInit() {
-    console.log('ngOnInit in Course Item');
-  }
+  ngOnInit() { }
 
-  ngOnChanges() {
-    console.log('ngOnChange in Course Item');
-  }
+  ngOnChanges() { }
 
   deleteCourseById(id) {
     this.deleteCourse.emit(id);

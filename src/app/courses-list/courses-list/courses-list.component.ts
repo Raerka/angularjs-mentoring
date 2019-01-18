@@ -1,6 +1,5 @@
 import {Component, OnChanges, OnInit} from '@angular/core';
-import {CourseItem} from '../courses-item.interface';
-import {CoursesService} from '../courses.service';
+import {CourseItem, CourseService} from '../course.service';
 import {CoursesFindPipe} from '../../pipes/courses-find.pipe';
 import {DataService} from '../../services/data.service';
 
@@ -14,26 +13,23 @@ export class CoursesListComponent implements OnInit, OnChanges {
 
   courseItems: CourseItem[] = [];
 
-  constructor(private _coursesFindPipe: CoursesFindPipe, private dataService: DataService) {
-    console.log('Constructor in Courses List');
-  }
+  constructor(private _coursesFindPipe: CoursesFindPipe, private dataService: DataService) { }
 
   ngOnInit() {
-    this.courseItems = CoursesService.getCoursesItems();
+    this.courseItems = CourseService.getCoursesItems();
     this.dataService.dataSource.subscribe(this.findCourseByInput.bind(this));
-    console.log('ngOnInit in Courses List');
   }
 
-  ngOnChanges() {
-    console.log('ngOnChange in Courses List!!!!!!!!!!!!!');
-  }
+  ngOnChanges() { }
 
   deleteCourse(id) {
-    console.log(`Delete course with id ${id}`);
+    if (confirm('Do you really want to delete this course?')) {
+      CourseService.removeCourseItemById(this.courseItems, id);
+    }
   }
 
   findCourseByInput(data): void {
-    this.courseItems = this._coursesFindPipe.transform(CoursesService.getCoursesItems(), data);
+    this.courseItems = this._coursesFindPipe.transform(CourseService.getCoursesItems(), data);
   }
 
   loadMoreCourses() {
