@@ -9,17 +9,19 @@ import {RouterModule} from '@angular/router';
 import {ROUTES} from './app.routes';
 import {LoginModule} from './login/login.module';
 import {AuthorizationService} from './services/authorization.service';
+import {AddCourseModule} from './add-course/add-course.module';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
   imports: [
     BrowserModule,
     CoreModule,
     LoginModule,
     CoursesListModule,
+    AddCourseModule,
     RouterModule.forRoot(ROUTES)
+  ],
+  declarations: [
+    AppComponent
   ],
   providers: [
     UserService,
