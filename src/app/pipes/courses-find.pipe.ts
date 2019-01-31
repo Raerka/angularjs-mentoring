@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import {CourseItem} from '../courses-list/courses.service';
+import {CourseItem} from '../courses-list/course.service';
 
 @Pipe({
   name: 'coursesFind'

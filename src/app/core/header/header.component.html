@@ -4,8 +4,9 @@
       <a class="navbar-brand" href="#">Logo for Courses</a>
     </div>
     <div class="col text-right">
-      <span class="mr-4">{{user.firstName}} {{user.lastName}}</span>
-      <button class="btn btn-outline-primary" type="button">Log off</button>
+      <span class="mr-4" *ngIf="isAuthenticated()">{{user.firstName}} {{user.lastName}}</span>
+      <button *ngIf="!isAuthenticated()" class="btn btn-outline-primary" type="button" (click)="login()">Log in</button>
+      <button *ngIf="isAuthenticated()" class="btn btn-outline-primary" type="button" (click)="logout()">Log off</button>
     </div>
   </div>
 </header>

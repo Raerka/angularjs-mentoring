@@ -1,9 +1,12 @@
 <div class="container">
   <app-header></app-header>
-  <main role="main">
+  <main role="main" *ngIf="isAuth()">
     <app-breadcrumbs></app-breadcrumbs>
     <app-toolbox></app-toolbox>
     <router-outlet></router-outlet>
+  </main>
+  <main role="main" *ngIf="!isAuth()">
+    <app-login></app-login>
   </main>
   <app-footer></app-footer>
 </div>

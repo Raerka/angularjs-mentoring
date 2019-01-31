@@ -1,14 +1,15 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { CourseItem } from '../courses-list/course.service';
 
 @Pipe({
   name: 'orderByDate'
 })
 export class ArraySortPipe implements PipeTransform {
 
-  transform(array: any, date: string): any[] {
+  transform(array: CourseItem[], date: string): CourseItem[] {
     if (!Array.isArray(array)) {
       return;
     }
-    return array.sort((a: any, b: any) => new Date(b[date]) - new Date(a[date]));
+    return array.sort((a: any, b: any) => +new Date(b[date]) - +new Date(a[date]));
   }
 }

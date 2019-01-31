@@ -7,7 +7,12 @@ import { ToolboxComponent } from './toolbox/toolbox.component';
 import {FormsModule} from '@angular/forms';
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, BreadcrumbsComponent, ToolboxComponent],
+  declarations: [
+    HeaderComponent,
+    FooterComponent,
+    BreadcrumbsComponent,
+    ToolboxComponent
+  ],
   imports: [
     CommonModule,
     FormsModule
