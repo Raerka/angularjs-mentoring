@@ -1,7 +1,7 @@
-<header class="rounded-top bg-light">
+<header class="rounded-top bg-light mb-3">
   <div class="navbar navbar-light row">
     <div class="col bg-light">
-      <a class="navbar-brand" href="#">Logo for Courses</a>
+      <a [routerLink]="['/courses']" class="navbar-brand">Logo for Courses</a>
     </div>
     <div class="col text-right">
       <span class="mr-4" *ngIf="isAuthenticated()">{{user.firstName}} {{user.lastName}}</span>

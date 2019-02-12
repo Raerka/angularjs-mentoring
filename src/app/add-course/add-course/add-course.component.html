@@ -2,7 +2,7 @@
   <form class="form-signin">
     <div class="form-group col-12">
       <label for="title">Title</label>
-      <input [(ngModel)]="id" name="title" type="text" class="form-control" id="title" placeholder="Please enter title">
+      <input [(ngModel)]="title" name="title" type="text" class="form-control" id="title" placeholder="Please enter title">
     </div>
     <div class="form-group col-12">
       <label for="description">Description</label>
@@ -24,7 +24,7 @@
       >Save</button>
       <button class="btn btn-lg btn-outline-primary col-1"
               type="reset"
-              (click)="onClickCancel()"
+              (click)="gotoCoursesList()"
       >Cancel</button>
     </div>
   </form>

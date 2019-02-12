@@ -1,21 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LoginComponent } from './login.component';
-import { describe, expect } from '@angular/core/testing/src/testing_internal';
+import { NoContentComponent } from './no-content.component';
 
-describe('LoginComponent', () => {
-  let component: LoginComponent;
-  let fixture: ComponentFixture<LoginComponent>;
+describe('NoContentComponent', () => {
+  let component: NoContentComponent;
+  let fixture: ComponentFixture<NoContentComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LoginComponent ]
+      declarations: [ NoContentComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LoginComponent);
+    fixture = TestBed.createComponent(NoContentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
