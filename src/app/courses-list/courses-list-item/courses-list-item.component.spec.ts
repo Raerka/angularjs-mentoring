@@ -1,8 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import {describe, expect} from '@angular/core/testing/src/testing_internal';
 import { CoursesListItemComponent } from './courses-list-item.component';
 import {DebugElement} from '@angular/core';
 import {By} from '@angular/platform-browser';
+import {spyOn} from 'jasmine';
 
 describe('CoursesListItemComponent', () => {
   let component: CoursesListItemComponent;
@@ -12,6 +13,7 @@ describe('CoursesListItemComponent', () => {
     title: 'Video Course 2',
     creationDate: '05.15.2018',
     duration: 48,
+    topRated: false,
     description: 'Test Description'
   };
 

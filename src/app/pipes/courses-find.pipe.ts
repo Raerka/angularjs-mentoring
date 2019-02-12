@@ -7,7 +7,6 @@ import {CourseItem} from '../courses-list/course.service';
 export class CoursesFindPipe implements PipeTransform {
 
   transform(courses: any[], input: string): CourseItem[] {
-    const result = courses.filter(course => course.title.includes(input));
-    return result;
+    return courses.filter(course => course.title.includes(input));
   }
 }

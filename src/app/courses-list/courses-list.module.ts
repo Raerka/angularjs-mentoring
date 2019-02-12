@@ -4,20 +4,18 @@ import { CoursesListComponent } from './courses-list/courses-list.component';
 import { CoursesListItemComponent } from './courses-list-item/courses-list-item.component';
 import { HighlightCourseDirective } from '../directives/highlight-course.directive';
 import {MatIconModule} from '@angular/material';
-import {DurationPipe} from '../pipes/duration.pipe';
-import {ArraySortPipe} from '../pipes/array-sort.pipe';
+import {PipesModule} from '../pipes/pipes.module';
 
 @NgModule({
   declarations: [
     CoursesListComponent,
     CoursesListItemComponent,
-    HighlightCourseDirective,
-    DurationPipe,
-    ArraySortPipe
+    HighlightCourseDirective
   ],
   imports: [
     MatIconModule,
     CommonModule,
+    PipesModule
   ],
   exports: [
     CoursesListComponent

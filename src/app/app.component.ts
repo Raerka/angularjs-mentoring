@@ -13,4 +13,8 @@ export class AppComponent {
   isAuth() {
     return this.authorizationService.isAuthenticated();
   }
+
+  isAddingEnable() {
+    return false;
+  }
 }

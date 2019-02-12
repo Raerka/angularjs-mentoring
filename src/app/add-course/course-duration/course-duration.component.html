@@ -1,0 +1,11 @@
+<div class="form-group">
+  <div class="d-inline-block col-3">
+    <label for="duration">Duration</label>
+    <input [(ngModel)]="courseDuration"
+           type="text"
+           class="form-control"
+           id="duration"
+           placeholder="Please enter duration in min">
+  </div>
+  <span class="col-6">{{this.courseDuration | duration}}</span>
+</div>

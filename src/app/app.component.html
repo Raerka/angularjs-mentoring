@@ -1,12 +1,15 @@
 <div class="container">
   <app-header></app-header>
-  <main role="main" *ngIf="isAuth()">
+  <main role="main" *ngIf="!isAuth()">
     <app-breadcrumbs></app-breadcrumbs>
     <app-toolbox></app-toolbox>
     <router-outlet></router-outlet>
   </main>
-  <main role="main" *ngIf="!isAuth()">
+  <main role="main" *ngIf="isAuth() && isAddingEnable()">
     <app-login></app-login>
+  </main>
+  <main role="main" *ngIf="isAuth()">
+    <app-add-course></app-add-course>
   </main>
   <app-footer></app-footer>
 </div>
