@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import {AuthorizationService} from './services/authorization.service';
 
 @Component({
   selector: 'app-root',
@@ -8,13 +7,5 @@ import {AuthorizationService} from './services/authorization.service';
 })
 export class AppComponent {
 
-  constructor(private authorizationService: AuthorizationService) {}
-
-  isAuth() {
-    return this.authorizationService.isAuthenticated();
-  }
-
-  isAddingEnable() {
-    return false;
-  }
+  constructor() { }
 }

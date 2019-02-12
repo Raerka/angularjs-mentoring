@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { CourseService } from '../../courses-list/course.service';
 
 @Component({
   selector: 'app-course-authors',
@@ -7,11 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CourseAuthorsComponent implements OnInit {
 
-  authors = '';
+  public authors = '';
+  public routerParams: any = {};
 
-  constructor() { }
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.params.subscribe(data => {
+      this.routerParams.id = data['id'];
+    });
+    if (this.routerParams.id) {
+      const courseItem = CourseService.getCoursesItemById(this.routerParams.id);
+      this.authors = courseItem.authors;
+    }
   }
 
 }
