@@ -19,13 +19,13 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  // it(`should have as title 'angularjs-mentoring'`, () => {
+  // it(`should have as name 'angularjs-mentoring'`, () => {
   //   const fixture = TestBed.createComponent(AppComponent);
   //   const app = fixture.debugElement.componentInstance;
-  //   expect(app.title).toEqual('angularjs-mentoring');
+  //   expect(app.name).toEqual('angularjs-mentoring');
   // });
   //
-  // it('should render title in a h1 tag', () => {
+  // it('should render name in a h1 tag', () => {
   //   const fixture = TestBed.createComponent(AppComponent);
   //   fixture.detectChanges();
   //   const compiled = fixture.debugElement.nativeElement;

@@ -1,7 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HeaderComponent } from './header.component';
-import {User, UserService} from '../../services/user.service';
+import { UserService } from '../../services/user.service';
+import { describe, expect } from '@angular/core/testing/src/testing_internal';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;

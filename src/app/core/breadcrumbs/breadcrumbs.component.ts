@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { CourseService } from '../../courses-list/course.service';
+import { CourseItem, CourseService } from '../../services/course.service';
 
 @Component({
   selector: 'app-breadcrumbs',
@@ -9,17 +9,19 @@ import { CourseService } from '../../courses-list/course.service';
 })
 export class BreadcrumbsComponent implements OnInit {
 
-  public title = '';
+  public name = '';
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private courseService: CourseService) { }
 
   ngOnInit() {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        this.title = '';
+        this.name = '';
         const courseId = +event.urlAfterRedirects.split('/')[2];
         if (courseId && typeof courseId === 'number') {
-          this.title = CourseService.getCoursesItemById(courseId).title;
+          this.courseService.getCoursesItemById(courseId).subscribe((res: CourseItem) => {
+            this.name = res.name;
+          });
         }
       }
     });

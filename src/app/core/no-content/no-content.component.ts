@@ -11,5 +11,4 @@ export class NoContentComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }

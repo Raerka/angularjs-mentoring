@@ -1,42 +1,35 @@
 import { Injectable } from '@angular/core';
-
-import { User } from './user.service';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+
+const AUTH_URL = 'http://localhost:3004/auth/login';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthorizationService {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+              private http: HttpClient) {
+  }
 
-  login(): void {
-    console.log('logged in successfully');
-    localStorage.setItem('token', 'userToken');
-    this.gotoCoursesList();
+  login(login: string, password: string) {
+    return this.http.post(`${AUTH_URL}`, {login, password});
   }
 
   logout(): void {
-    console.log('Logout action');
     localStorage.removeItem('token');
+    localStorage.removeItem('userName');
     this.gotoLoginPage();
   }
 
   isAuthenticated(): boolean {
-    return localStorage.getItem('token') === 'userToken';
-  }
-
-  getUserInfo(): User {
-    const fakeUser: User = {
-      id: 3,
-      firstName: 'Andrei_Fake',
-      lastName: 'Kasmykou_Fake'
-    };
-    return fakeUser;
-  }
-
-  gotoCoursesList() {
-    this.router.navigate(['courses']);
+    const token = localStorage.getItem('token');
+    if (!token) {
+      this.gotoLoginPage();
+      return false;
+    }
+    return true;
   }
 
   gotoLoginPage() {

@@ -1,4 +1,9 @@
 <div class="form-group col-12">
   <label for="authors">Authors</label>
-  <input [(ngModel)]="authors" type="text" class="form-control" id="authors" placeholder="Please enter authors">
+  <input [(ngModel)]="authors"
+         (ngModelChange)="onAuthorsChange($event)"
+         type="text"
+         class="form-control"
+         id="authors"
+         placeholder="Please enter authors">
 </div>
