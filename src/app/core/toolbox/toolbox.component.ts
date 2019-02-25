@@ -10,17 +10,14 @@ import { Router } from '@angular/router';
 export class ToolboxComponent implements OnInit {
 
   public textFragment = '';
-  public data = '';
 
-  constructor(private dataService: DataService, private router: Router, ) { }
-
-  ngOnInit() {
-    this.dataService.dataSource.subscribe(data => this.data = data);
+  constructor(private dataService: DataService, private router: Router, ) {
   }
 
-  findCourse() {
-    console.log(`Please find this ${this.textFragment}`);
-    this.dataService.changeData(this.textFragment);
+  ngOnInit() { }
+
+  findCourse(textFragment: string) {
+    this.dataService.changeSearchInputValue(textFragment);
   }
 
   addCourse() {

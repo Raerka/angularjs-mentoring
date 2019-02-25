@@ -3,8 +3,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ToolboxComponent } from './toolbox.component';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
-import { describe, expect } from '@angular/core/testing/src/testing_internal';
-import { spyOn } from 'jasmine';
 
 describe('ToolboxComponent', () => {
   let component: ToolboxComponent;
@@ -37,11 +35,5 @@ describe('ToolboxComponent', () => {
     fixture.whenStable().then(() => {
       expect(findCourseSpy).toHaveBeenCalled();
     });
-  });
-
-  it('should call method clearInput after clicking', async() => {
-    const clearInputSpy = spyOn(component, 'clearInput');
-    component.findCourse();
-    expect(clearInputSpy).toHaveBeenCalled();
   });
 });

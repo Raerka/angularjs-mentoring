@@ -1,7 +1,6 @@
 import { Component, Injectable, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { AuthorizationService } from '../services/authorization.service';
-import { UserService } from '../services/user.service';
+import { DataService } from '../services/data.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,28 +15,25 @@ export class LoginComponent implements OnInit {
   public login = '';
   public password = '';
 
-  constructor(
-    private authorizationService: AuthorizationService,
-    private userService: UserService,
-    private router: Router
-    ) {}
+  constructor(private authorizationService: AuthorizationService,
+              private dataService: DataService,
+  ) { }
 
   ngOnInit() {
+    this.dataService.loginObservable.subscribe(login => this.login = login);
+    this.dataService.passwordObservable.subscribe(password => this.password = password);
+  }
+
+  changeLogin(login: string) {
+    this.dataService.changeLoginValue(login);
+  }
+
+  changePassword(password: string) {
+    this.dataService.changePasswordValue(password);
   }
 
   onLogin() {
-    this.authorizationService.login(this.login, this.password).subscribe((res: any) => {
-      localStorage.setItem('token', res.token);
-      this.gotoCoursesList();
-    });
-    this.login = '';
-    this.password = '';
-  }
-
-  gotoCoursesList() {
-    this.userService.getUserInfo().subscribe((res: any) => {
-      localStorage.setItem('userName', JSON.stringify(res.name));
-    });
-    this.router.navigate(['courses']);
+    this.dataService.changeSpinnerStateValue(true);
+    this.authorizationService.login();
   }
 }
