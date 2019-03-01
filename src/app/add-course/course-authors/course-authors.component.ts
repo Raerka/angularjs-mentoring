@@ -1,27 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { CourseService } from '../../courses-list/course.service';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Author } from '../../services/course.service';
 
 @Component({
   selector: 'app-course-authors',
   templateUrl: './course-authors.component.html',
   styleUrls: ['./course-authors.component.css']
 })
-export class CourseAuthorsComponent implements OnInit {
+export class CourseAuthorsComponent {
+  @Input()
+  authors = '';
 
-  public authors = '';
-  public routerParams: any = {};
+  @Output()
+  authorsChange: EventEmitter<Author[]> = new EventEmitter<Author[]>();
 
-  constructor(private route: ActivatedRoute) { }
+  constructor() { }
 
-  ngOnInit() {
-    this.route.params.subscribe(data => {
-      this.routerParams.id = data['id'];
-    });
-    if (this.routerParams.id) {
-      const courseItem = CourseService.getCoursesItemById(this.routerParams.id);
-      this.authors = courseItem.authors;
-    }
+  onAuthorsChange(event) {
+    this.authorsChange.emit(event);
   }
-
 }

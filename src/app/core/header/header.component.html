@@ -4,7 +4,7 @@
       <a [routerLink]="['/courses']" class="navbar-brand">Logo for Courses</a>
     </div>
     <div class="col text-right">
-      <span class="mr-4" *ngIf="isAuthenticated()">{{user.firstName}} {{user.lastName}}</span>
+      <span class="mr-4" *ngIf="isAuthenticated()">{{userName.first}} {{userName.last}}</span>
       <button *ngIf="!isAuthenticated()" class="btn btn-outline-primary" type="button" (click)="login()">Log in</button>
       <button *ngIf="isAuthenticated()" class="btn btn-outline-primary" type="button" (click)="logout()">Log off</button>
     </div>

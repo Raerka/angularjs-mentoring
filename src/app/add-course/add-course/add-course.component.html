@@ -2,7 +2,7 @@
   <form class="form-signin">
     <div class="form-group col-12">
       <label for="title">Title</label>
-      <input [(ngModel)]="title" name="title" type="text" class="form-control" id="title" placeholder="Please enter title">
+      <input [(ngModel)]="name" name="title" type="text" class="form-control" id="title" placeholder="Please enter title">
     </div>
     <div class="form-group col-12">
       <label for="description">Description</label>
@@ -14,9 +14,9 @@
                 id="description">
       </textarea>
     </div>
-    <app-course-date></app-course-date>
-    <app-course-duration></app-course-duration>
-    <app-course-authors></app-course-authors>
+    <app-course-date [(creationDate)]="creationDate"></app-course-date>
+    <app-course-duration [(length)]="length"></app-course-duration>
+    <app-course-authors [(authors)]="authors"></app-course-authors>
     <div class="col-12 mt-2">
       <button class="btn btn-lg btn-outline-primary col-1 mr-2"
               type="submit"

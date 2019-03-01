@@ -1,25 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { User, UserService } from '../../services/user.service';
 import { AuthorizationService } from '../../services/authorization.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
-  providers: [UserService, AuthorizationService]
+  providers: [AuthorizationService]
 })
 export class HeaderComponent implements OnInit {
 
-  user: User;
+  userName = null;
 
-  constructor(private userService: UserService, private authorizationService: AuthorizationService) {}
+  constructor(
+    private authorizationService: AuthorizationService,
+  ) {}
 
   ngOnInit() {
-    this.user = this.userService.user;
   }
 
   login() {
-    this.authorizationService.login();
+    console.log('login without bindings. Waiting rxjx');
   }
 
   logout() {
@@ -27,6 +27,7 @@ export class HeaderComponent implements OnInit {
   }
 
   isAuthenticated() {
-    return this.authorizationService.isAuthenticated();
+    this.userName = JSON.parse(localStorage.getItem('userName'));
+    return this.userName;
   }
 }

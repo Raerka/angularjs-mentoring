@@ -21,6 +21,6 @@ import { CoreModule } from '../core/core.module';
   ],
   exports: [
     CoursesListComponent
-  ]
+  ],
 })
 export class CoursesListModule { }

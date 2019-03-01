@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class ToolboxComponent implements OnInit {
 
-  public course = '';
+  public textFragment = '';
   public data = '';
 
   constructor(private dataService: DataService, private router: Router, ) { }
@@ -19,13 +19,8 @@ export class ToolboxComponent implements OnInit {
   }
 
   findCourse() {
-    console.log(`Please find this ${this.course}`);
-    this.dataService.changeData(this.course);
-    this.clearInput();
-  }
-
-  clearInput() {
-    this.course = '';
+    console.log(`Please find this ${this.textFragment}`);
+    this.dataService.changeData(this.textFragment);
   }
 
   addCourse() {
