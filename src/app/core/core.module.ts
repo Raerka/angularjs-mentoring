@@ -8,6 +8,8 @@ import { FooterComponent } from './footer/footer.component';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { ToolboxComponent } from './toolbox/toolbox.component';
 import { NoContentComponent } from './no-content/no-content.component';
+import { SpinnerComponent } from './spinner/spinner.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -15,9 +17,11 @@ import { NoContentComponent } from './no-content/no-content.component';
     FooterComponent,
     BreadcrumbsComponent,
     ToolboxComponent,
-    NoContentComponent
+    NoContentComponent,
+    SpinnerComponent
   ],
   imports: [
+    MatProgressSpinnerModule,
     CommonModule,
     FormsModule,
     RouterModule
@@ -26,7 +30,8 @@ import { NoContentComponent } from './no-content/no-content.component';
     HeaderComponent,
     FooterComponent,
     BreadcrumbsComponent,
-    ToolboxComponent
+    ToolboxComponent,
+    SpinnerComponent
   ]
 })
 export class CoreModule { }

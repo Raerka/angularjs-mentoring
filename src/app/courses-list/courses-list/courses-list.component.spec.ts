@@ -1,8 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CoursesListComponent } from './courses-list.component';
-import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
-import {By} from '@angular/platform-browser';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { By } from '@angular/platform-browser';
 
 describe('CoursesListComponent', () => {
   let component: CoursesListComponent;

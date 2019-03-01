@@ -7,11 +7,41 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class DataService {
 
-  dataSource = new BehaviorSubject<string>('');
+  searchInputObservable = new BehaviorSubject<string>('');
+  userNameObservable = new BehaviorSubject<string>('');
+  spinnerStateObservable = new BehaviorSubject<boolean>(false);
+  loginObservable = new BehaviorSubject<string>('');
+  passwordObservable = new BehaviorSubject<string>('');
+  isAuthorizedObservable = new BehaviorSubject<boolean>(false);
 
-  constructor() { }
+  constructor() {
+  }
 
-  changeData(data: string) {
-    this.dataSource.next(data);
+  changeSearchInputValue(textFragment: string) {
+    if (textFragment.length > 3) {
+      this.searchInputObservable.next(textFragment);
+    } else {
+      this.searchInputObservable.next('');
+    }
+  }
+
+  changeUserNameValue(userName: string) {
+    this.userNameObservable.next(userName);
+  }
+
+  changeSpinnerStateValue(isShow: boolean) {
+    this.spinnerStateObservable.next(isShow);
+  }
+
+  changeLoginValue(login: string) {
+    this.loginObservable.next(login);
+  }
+
+  changePasswordValue(password: string) {
+    this.passwordObservable.next(password);
+  }
+
+  changeIsAuthorizedValue(isAuthorized: boolean) {
+    this.isAuthorizedObservable.next(isAuthorized);
   }
 }

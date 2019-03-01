@@ -1,20 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import {describe, expect} from '@angular/core/testing/src/testing_internal';
 import { CoursesListItemComponent } from './courses-list-item.component';
-import {DebugElement} from '@angular/core';
-import {By} from '@angular/platform-browser';
-import {spyOn} from 'jasmine';
+import { DebugElement } from '@angular/core';
+import { By } from '@angular/platform-browser';
 
 describe('CoursesListItemComponent', () => {
   let component: CoursesListItemComponent;
   let fixture: ComponentFixture<CoursesListItemComponent>;
   const EXPECTED_COURSE_ITEM =    {
     id: 2,
-    title: 'Video Course 2',
-    creationDate: '05.15.2018',
-    duration: 48,
-    topRated: false,
-    description: 'Test Description'
+    name: 'Test',
+    date: '05.15.2018',
+    length: 48,
+    isTopRated: false,
+    description: 'Test Description',
+    authors: []
   };
 
   beforeEach(async(() => {
