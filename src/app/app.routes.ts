@@ -1,9 +1,9 @@
 import { Route } from '@angular/router';
 
-import { CoursesListComponent } from './courses-list/courses-list/courses-list.component';
-import { AddCourseComponent } from './add-course/add-course/add-course.component';
-import { NoContentComponent } from './core/no-content/no-content.component';
-import { LoginComponent } from './login/login.component';
+import { CoursesListComponent } from './modules/courses-list/courses-list/courses-list.component';
+import { AddCourseComponent } from './modules/add-course/add-course/add-course.component';
+import { NoContentComponent } from './modules/core/no-content/no-content.component';
+import { LoginComponent } from './modules/login/login.component';
 import { AuthGuard } from './guards/auth.guard';
 
 export const ROUTES: Route[] = [

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthorizationService } from '../../services/authorization.service';
-import { DataService } from '../../services/data.service';
+import { AuthorizationService } from '../../../services/authorization.service';
+
+import { select, Store } from '@ngrx/store';
+import { User } from '../../../services/user.service';
+import * as fromRoot from '../../../reducers';
 
 @Component({
   selector: 'app-header',
@@ -15,12 +18,12 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private authorizationService: AuthorizationService,
-    private dataService: DataService,
+    private store: Store<fromRoot.State>,
   ) {}
 
   ngOnInit() {
-    this.dataService.userNameObservable.subscribe(name => this.userName = name);
-    this.dataService.isAuthorizedObservable.subscribe(isAuthorized => this.isAuthorized = isAuthorized);
+    this.store.pipe(select(fromRoot.getIsLoggedIn)).subscribe(isLoggedIn => this.isAuthorized = isLoggedIn);
+    this.store.pipe(select(fromRoot.getUser)).subscribe((user: User) => this.userName = user.name);
   }
 
   login() {

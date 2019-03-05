@@ -1,6 +1,9 @@
 import { Component, Injectable, OnInit } from '@angular/core';
-import { AuthorizationService } from '../services/authorization.service';
-import { DataService } from '../services/data.service';
+import { AuthorizationService } from '../../services/authorization.service';
+import { DataService } from '../../services/data.service';
+import { Store } from '@ngrx/store';
+import * as fromRoot from '../../reducers';
+import * as App from '../../actions/app.actions';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +20,9 @@ export class LoginComponent implements OnInit {
 
   constructor(private authorizationService: AuthorizationService,
               private dataService: DataService,
-  ) { }
+              private store: Store<fromRoot.State>
+  ) {
+  }
 
   ngOnInit() {
     this.dataService.loginObservable.subscribe(login => this.login = login);
@@ -33,7 +38,7 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin() {
-    this.dataService.changeSpinnerStateValue(true);
+    this.store.dispatch(new App.LoadingStart());
     this.authorizationService.login();
   }
 }

@@ -3,10 +3,14 @@ import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
-import { CoreModule } from './core/core.module';
-import { CoursesListModule } from './courses-list/courses-list.module';
-import { LoginModule } from './login/login.module';
-import { AddCourseModule } from './add-course/add-course.module';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { reducers, metaReducers } from './reducers';
+
+import { CoreModule } from './modules/core/core.module';
+import { CoursesListModule } from './modules/courses-list/courses-list.module';
+import { LoginModule } from './modules/login/login.module';
+import { AddCourseModule } from './modules/add-course/add-course.module';
 
 import { AppComponent } from './app.component';
 
@@ -14,8 +18,10 @@ import { UserService } from './services/user.service';
 import { AuthorizationService } from './services/authorization.service';
 import { CourseService } from './services/course.service';
 
-import { ROUTES } from './app.routes';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+
+import { ROUTES } from './app.routes';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -29,6 +35,8 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     CoursesListModule,
     LoginModule,
     AddCourseModule,
+    StoreModule.forRoot(reducers, { metaReducers }),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
   ],
   providers: [
     UserService,
