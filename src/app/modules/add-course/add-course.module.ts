@@ -5,7 +5,7 @@ import { AddCourseComponent } from './add-course/add-course.component';
 import { CourseDurationComponent } from './course-duration/course-duration.component';
 import { CourseAuthorsComponent } from './course-authors/course-authors.component';
 import { CourseDateComponent } from './course-date/course-date.component';
-import { PipesModule } from '../pipes/pipes.module';
+import { PipesModule } from '../../pipes/pipes.module';
 
 @NgModule({
   declarations: [

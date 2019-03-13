@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import { ChangeDetectionStrategy } from '@angular/compiler/src/core';
 
-import { CourseItem } from '../../services/course.service';
+import { CourseItem } from '../../../services/course.service';
 import { Router } from '@angular/router';
 
 @Component({

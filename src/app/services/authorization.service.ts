@@ -1,9 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+
 import { DataService } from './data.service';
-import { UserService } from './user.service';
-import { Observable } from 'rxjs/index';
+import { User, UserService } from './user.service';
+
+import { Store } from '@ngrx/store';
+
+import * as Login from '../actions/login.actions';
+import * as App from '../actions/app.actions';
+
+import * as fromRoot from '../reducers';
 
 const AUTH_URL = 'http://localhost:3004/auth/login';
 
@@ -15,7 +22,8 @@ export class AuthorizationService {
   constructor(private router: Router,
               private http: HttpClient,
               private userService: UserService,
-              private dataService: DataService) {
+              private dataService: DataService,
+              private store: Store<fromRoot.State>) {
   }
 
   login() {
@@ -25,26 +33,23 @@ export class AuthorizationService {
       .subscribe(
         (res: any) => {
           localStorage.setItem('token', res.token);
-          this.dataService.changeIsAuthorizedValue(true);
+          this.store.dispatch(new Login.Login());
           this.gotoCoursesList();
         },
         (err) => {
           console.log(err);
+          this.store.dispatch(new App.LoadingEnd());
           this.clearUserInfo();
           this.gotoLoginPage();
           alert('Wrong Credentials');
-          this.dataService.changeSpinnerStateValue(false);
         });
   }
 
   logout(): void {
     localStorage.removeItem('token');
+    this.store.dispatch(new Login.Logout());
     this.clearUserInfo();
     this.gotoLoginPage();
-  }
-
-  isAuthenticated(): boolean {
-    return this.dataService.isAuthorizedObservable.value;
   }
 
   gotoLoginPage() {
@@ -52,17 +57,15 @@ export class AuthorizationService {
   }
 
   gotoCoursesList() {
-    this.userService.getUserInfo().subscribe((res: any) => {
-      this.dataService.changeUserNameValue(res.name);
+    this.userService.getUserInfo().subscribe((user: User) => {
+      this.store.dispatch(new Login.LoginSuccess({user}));
     });
+    this.store.dispatch(new App.LoadingEnd());
     this.router.navigate(['courses']);
-    this.dataService.changeSpinnerStateValue(false);
   }
 
   clearUserInfo() {
     this.dataService.changeLoginValue('');
     this.dataService.changePasswordValue('');
-    this.dataService.changeUserNameValue('');
-    this.dataService.changeIsAuthorizedValue(false);
   }
 }

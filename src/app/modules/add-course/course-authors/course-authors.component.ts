@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Author } from '../../services/course.service';
+import { Author } from '../../../services/course.service';
 
 @Component({
   selector: 'app-course-authors',

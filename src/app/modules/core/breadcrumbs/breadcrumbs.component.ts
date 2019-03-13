@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { CourseItem, CourseService } from '../../services/course.service';
+import { CourseItem, CourseService } from '../../../services/course.service';
 
 @Component({
   selector: 'app-breadcrumbs',

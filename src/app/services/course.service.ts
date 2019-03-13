@@ -49,11 +49,14 @@ export class CourseService {
   }
 
   createCoursesItem(courseItem: CourseItem): void {
+    console.log('Creating course item - ');
     console.log(courseItem);
     // this.http.post(`${COURSES_URL}`, courseItem);
   }
 
   updateCoursesItem(courseItem: CourseItem): void {
-    console.log('Updating course item');
+    console.log('Updating course item - ');
+    console.log(courseItem);
+    // this.http.post(`${COURSES_URL}`, courseItem);
   }
 }
