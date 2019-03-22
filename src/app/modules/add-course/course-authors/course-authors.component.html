@@ -1,9 +1,41 @@
 <div class="form-group col-12">
-  <label for="authors">Authors</label>
-  <input [(ngModel)]="authors"
-         (ngModelChange)="onAuthorsChange($event)"
-         type="text"
-         class="form-control"
-         id="authors"
-         placeholder="Please enter authors">
+  <label for="author">Authors</label>
+  <span *ngIf="isEmpty() && control?.touched" class="error">
+        Authors is required
+  </span>
+  <mat-form-field>
+    <mat-chip-list #chipList
+                   [formControl]="control"
+    >
+      <mat-chip
+        *ngFor="let author of authors"
+        [selectable]="selectable"
+        [removable]="removable"
+        (removed)="remove(author)">
+        {{author}}
+        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+      </mat-chip>
+      <input
+        [formControl]="authorControl"
+        matInput
+        placeholder="Please enter authors"
+        id="author"
+        class="form-control"
+        [ngClass]="{'ng-invalid': control?.touched && isEmpty()}"
+        (change)="onAuthorsChange($event)"
+        (blur)="onTouched()"
+        #authorInput
+        [matAutocomplete]="auto"
+        [matChipInputFor]="chipList"
+        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+        [matChipInputAddOnBlur]="addOnBlur"
+        (matChipInputTokenEnd)="add($event)"
+      >
+    </mat-chip-list>
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+      <mat-option *ngFor="let author of filteredAuthors | async" [value]="author">
+        {{author.name}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
 </div>

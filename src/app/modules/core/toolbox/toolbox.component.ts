@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../../services/data.service';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-toolbox',
@@ -9,12 +10,20 @@ import { Router } from '@angular/router';
 })
 export class ToolboxComponent implements OnInit {
 
+  formGroup: FormGroup = null;
   public textFragment = '';
 
-  constructor(private dataService: DataService, private router: Router, ) {
+  constructor(
+    private dataService: DataService,
+    private router: Router,
+    private fb: FormBuilder) {
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.formGroup = this.fb.group({
+      textFragment: [this.textFragment]
+    });
+  }
 
   findCourse(textFragment: string) {
     this.dataService.changeSearchInputValue(textFragment);

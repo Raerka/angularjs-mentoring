@@ -3,6 +3,15 @@ import { ActivatedRoute, Router, RouterEvent } from '@angular/router';
 import { Author, CourseItem, CourseService } from '../../../services/course.service';
 import { select, Store } from '@ngrx/store';
 import * as fromRoot from '../../../reducers';
+import * as App from '../../../actions/app.actions';
+
+import * as CoursesList from '../../../actions/courses-list.actions';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+const TITLE_MAX_LENGTH = 50;
+const DESCRIPTION_MAX_LENGTH = 500;
+const DATE_PATTERN = /^\d{2}\/\d{2}\/\d{4}$/;
+const LENGTH_PATTERN = /^[0-9]*$/;
 
 @Component({
   selector: 'app-add-course',
@@ -11,28 +20,48 @@ import * as fromRoot from '../../../reducers';
 })
 export class AddCourseComponent implements OnInit {
 
-  public id = null;
-  public name = '';
-  public creationDate = '';
-  public length = null;
-  public description = '';
-  public authors = '';
-  public isTopRated = false;
+  id = null;
+  isTopRated = false;
+  allAuthors: Author[] = [];
+  routerParams: any = {};
+  formGroup: FormGroup = null;
 
-  public routerParams: any = {};
-
-  constructor(
-    private courseService: CourseService,
-    private router: Router,
-    private route: ActivatedRoute,
-    private store: Store<fromRoot.State>
-  ) {
+  constructor(private courseService: CourseService,
+              private router: Router,
+              private route: ActivatedRoute,
+              private store: Store<fromRoot.State>,
+              private fb: FormBuilder) {
     this.router.events.subscribe((event: RouterEvent) => {
       // console.log(event);
     });
+    store.pipe(select(fromRoot.getAllAuthors)).subscribe(allAuthors => this.allAuthors = allAuthors);
   }
 
   ngOnInit() {
+    this.init();
+    this.createForm();
+    this.initForm();
+  }
+
+  init() {
+    this.store.dispatch(new App.LoadingStart());
+    this.courseService.getAuthors().subscribe((res: Author[]) => {
+      this.store.dispatch(new CoursesList.FetchAuthorsSuccess({allAuthors: res}));
+      this.store.dispatch(new App.LoadingEnd());
+    });
+  }
+
+  createForm() {
+    this.formGroup = this.fb.group({
+      name: ['', [Validators.required, Validators.maxLength(TITLE_MAX_LENGTH)]],
+      creationDate: ['', [Validators.required, Validators.pattern(DATE_PATTERN)]],
+      length: [null, [Validators.required, Validators.pattern(LENGTH_PATTERN)]],
+      description: ['', [Validators.required, Validators.maxLength(DESCRIPTION_MAX_LENGTH)]],
+      authors: ['', [Validators.required]]
+    });
+  }
+
+  initForm() {
     this.route.params.subscribe(data => {
       this.routerParams.id = data['id'];
     });
@@ -40,12 +69,14 @@ export class AddCourseComponent implements OnInit {
       this.store.pipe(select(fromRoot.getCourseItemById, {id: +this.routerParams.id}))
         .subscribe((courseItem: CourseItem) => {
           this.id = courseItem.id;
-          this.name = courseItem.name;
-          this.creationDate = courseItem.date;
-          this.length = courseItem.length;
-          this.description = courseItem.description;
-          this.authors = this.getAuthorsString(courseItem.authors);
           this.isTopRated = courseItem.isTopRated;
+          this.formGroup.setValue({
+            name: courseItem.name,
+            creationDate: courseItem.date,
+            length: courseItem.length,
+            description: courseItem.description,
+            authors: this.getAuthorsNames(courseItem.authors)
+          });
         });
     }
   }
@@ -60,12 +91,16 @@ export class AddCourseComponent implements OnInit {
     this.gotoCoursesList();
   }
 
-  getAuthorsString(authors: Author[]): string {
-    let authorsString = '';
+  onClickCancel() {
+    this.gotoCoursesList();
+  }
+
+  getAuthorsNames(authors: Author[]): string[] {
+    const authorsNames = [];
     authors.forEach(author => {
-      authorsString += `${author.firstName} ${author.lastName}, `;
+      authorsNames.push(`${author.firstName} ${author.lastName}`);
     });
-    return authorsString;
+    return authorsNames;
   }
 
   gotoCoursesList() {
@@ -76,16 +111,19 @@ export class AddCourseComponent implements OnInit {
   createCourseItem() {
     return {
       id: this.id,
-      name: this.name,
-      date: this.creationDate,
-      length: this.length,
+      name: this.formGroup.controls['name'].value,
+      date: this.formGroup.controls['creationDate'].value,
+      length: this.formGroup.controls['length'].value,
       isTopRated: this.isTopRated,
-      description: this.description,
-      authors: [{
-        id: 123,
-        firstName: this.authors,
-        lastName: this.authors
-      }]
+      description: this.formGroup.controls['description'].value,
+      authors: this.formGroup.controls['authors'].value
     };
+  }
+
+  isValid() {
+    if (!this.formGroup.controls['authors'].value.length) {
+      return true;
+    }
+    return !this.formGroup.valid;
   }
 }

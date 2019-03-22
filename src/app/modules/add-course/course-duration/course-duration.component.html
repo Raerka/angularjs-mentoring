@@ -1,8 +1,16 @@
 <div class="form-group">
   <div class="d-inline-block col-3">
     <label for="duration">Duration</label>
+    <span *ngIf="control?.errors?.required && control?.touched" class="error">
+        Duration is required
+    </span>
+    <span *ngIf="control?.errors?.pattern && control?.touched" class="error">
+        Allows only digits
+    </span>
     <input [(ngModel)]="length"
-           (ngModelChange)="onLengthChange($event)"
+           [ngClass]="{'ng-invalid': control?.errors?.required && control?.touched}"
+           (change)="onLengthChange($event)"
+           (blur)="onTouched()"
            type="text"
            class="form-control"
            id="duration"

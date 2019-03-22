@@ -25,6 +25,7 @@ export const getUser = createSelector(getLoginState, fromLogin.getUser);
 
 export const getCoursesListState = (state: State) => state.coursesList;
 export const getCoursesList = createSelector(getCoursesListState, fromCoursesList.getCoursesList);
+export const getAllAuthors = createSelector(getCoursesListState, fromCoursesList.getAllAuthors);
 export const getCourseItemById = createSelector(
   getCoursesList,
  (coursesList, props) => coursesList.find(element => props.id === element.id));
