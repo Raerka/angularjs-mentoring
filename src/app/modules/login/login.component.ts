@@ -4,6 +4,7 @@ import { DataService } from '../../services/data.service';
 import { Store } from '@ngrx/store';
 import * as fromRoot from '../../reducers';
 import * as App from '../../actions/app.actions';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -15,18 +16,27 @@ import * as App from '../../actions/app.actions';
 })
 export class LoginComponent implements OnInit {
 
-  public login = '';
-  public password = '';
+  formGroup: FormGroup = null;
+  login = '';
+  password = '';
 
   constructor(private authorizationService: AuthorizationService,
               private dataService: DataService,
-              private store: Store<fromRoot.State>
-  ) {
-  }
+              private store: Store<fromRoot.State>,
+              private fb: FormBuilder
+  ) {}
 
   ngOnInit() {
-    this.dataService.loginObservable.subscribe(login => this.login = login);
+    this.createForm();
+    this.dataService.loginObservable.subscribe(login =>  this.login = login);
     this.dataService.passwordObservable.subscribe(password => this.password = password);
+  }
+
+  createForm() {
+    this.formGroup = this.fb.group({
+      login: [this.login, [Validators.required]],
+      password: [this.password, [Validators.required]]
+    });
   }
 
   changeLogin(login: string) {

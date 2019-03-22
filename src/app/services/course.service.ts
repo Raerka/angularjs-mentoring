@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/index';
 
 const COURSES_URL = 'http://localhost:3004/courses';
+const AUTHORS_URL = 'http://localhost:3004/authors';
 
 export interface CourseItem {
   id: number;
@@ -17,8 +18,9 @@ export interface CourseItem {
 
 export interface Author {
   id: number;
-  firstName: string;
-  lastName: string;
+  name?: string;
+  firstName?: string;
+  lastName?: string;
 }
 
 @Injectable({
@@ -48,15 +50,19 @@ export class CourseService {
     return this.http.delete(`${COURSES_URL}/${+id}`);
   }
 
-  createCoursesItem(courseItem: CourseItem): void {
+  createCoursesItem(courseItem: any): void {
     console.log('Creating course item - ');
     console.log(courseItem);
     // this.http.post(`${COURSES_URL}`, courseItem);
   }
 
-  updateCoursesItem(courseItem: CourseItem): void {
+  updateCoursesItem(courseItem: any): void {
     console.log('Updating course item - ');
     console.log(courseItem);
     // this.http.post(`${COURSES_URL}`, courseItem);
+  }
+
+  getAuthors(): Observable<Author[]> {
+    return this.http.get<Author[]>(`${AUTHORS_URL}`);
   }
 }

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -24,19 +25,20 @@ import { ROUTES } from './app.routes';
 import { environment } from '../environments/environment';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
   imports: [
     RouterModule.forRoot(ROUTES, {useHash: true}),
     BrowserModule,
     HttpClientModule,
     CoreModule,
+    ReactiveFormsModule,
     CoursesListModule,
     LoginModule,
     AddCourseModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+  ],
+  declarations: [
+    AppComponent
   ],
   providers: [
     UserService,

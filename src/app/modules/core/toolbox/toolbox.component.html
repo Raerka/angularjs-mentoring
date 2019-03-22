@@ -1,16 +1,19 @@
 <div class="form-inline mt-2 py-3 mt-md-0 mb-2 bg-light rounded">
   <div class="col-8">
+    <form name="form" [formGroup]="formGroup">
       <input
-        [ngModel]="textFragment"
+        formControlName="textFragment"
+        ([ngModel])="textFragment"
         (ngModelChange)="findCourse($event)"
         class="form-control mr-sm-2 w-50"
         type="text"
         placeholder="Name, fragment or date"
         aria-label="Search"
       >
+    </form>
   </div>
-    <div class="col-4 text-right">
-      <button (click)="addCourse()" class="btn btn-outline-primary" type="button">Add course</button>
-    </div>
+  <div class="col-4 text-right">
+    <button (click)="addCourse()" class="btn btn-outline-primary" type="button">Add course</button>
+  </div>
 </div>
 

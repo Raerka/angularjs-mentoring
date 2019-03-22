@@ -1,6 +1,17 @@
 <div class="form-group col-3">
   <label for="date">Date</label>
-  <input [(ngModel)]="creationDate"
-         (ngModelChange)="onCreationDateChange($event)"
-         type="text" class="form-control" id="date">
+  <span *ngIf="control?.errors?.required && control?.touched" class="error">
+        Date is required
+  </span>
+  <p *ngIf="control?.errors?.pattern && control?.touched" class="error">
+        Date isn't match pattern dd/MM/yyyy
+  </p>
+  <input type="text"
+         [ngClass]="{'ng-invalid': control?.touched && (control?.errors?.required || control?.errors?.pattern)}"
+         [(ngModel)]="creationDate"
+         (change)="onDateChange($event)"
+         (blur)="onTouched()"
+         [value]="creationDate"
+         class="form-control"
+         id="date">
 </div>
